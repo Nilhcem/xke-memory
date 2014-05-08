@@ -1,0 +1,124 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+        <title>Memory monitoring</title>
+
+        <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.0/jquery.min.js"></script>
+        <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.5.2/underscore-min.js"></script>
+        <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/highcharts/3.0.9/highcharts.js"></script>
+        <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/bootstrap-growl/1.0.0/jquery.bootstrap-growl.min.js"></script>
+        <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/moment.js/2.5.1/moment.min.js"></script>
+        <script type="text/javascript" src="main.js"></script>
+
+        <link rel="stylesheet" type="text/css" href="http://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.1.0/css/bootstrap.min.css">
+        <style>
+        .title {
+            cursor: pointer;
+        }
+        .arrow {
+            display: inline-block;
+            width: 0;
+            height: 0;
+            border-left: 8px solid transparent;
+            border-right: 8px solid transparent;
+            border-top: 8px solid #999;
+        }
+        .arrow.collapsed {
+            border-left: 8px solid transparent;
+            border-right: 8px solid transparent;
+            border-bottom: 8px solid #999;
+            border-top: none;
+        }
+        .bootstrap-growl {
+            position: fixed !important;
+        }
+        #grid td {
+            text-align: center;
+            border-left: 1px solid #ddd;
+        }
+        #grid .found {
+            background-color: #ccc;
+        }
+        footer {
+            min-height: 15px;
+        }
+        </style>
+    </head>
+    <body>
+
+<div class="container">
+    <section id="options">
+        <h2 class="title">Options <div class="arrow collapsed"></div></h2>
+        <div class="row block" style="display: none;">
+            <div class="col-md-4">
+                <label>Server host</label>
+                <input type="text" data-config="SERVER_HOST" class="form-control" placeholder="Server host" value="http://127.0.0.1:3000">
+            </div>
+            <div class="col-md-4">
+                <label>Admin password</label>
+                <input type="password" data-config="ADMIN_PASS" class="form-control" placeholder="Admin password" value="adminpass">
+            </div>
+            <div class="col-md-4">
+                <label>Refresh delay</label>
+                <input type="number" data-config="REFRESH_DELAY" class="form-control" placeholder="Refresh delay" min="1000" value="5000">
+            </div>
+        </div>
+    </section>
+
+    <section>
+        <h2>Live scores <button type="button" class="btn btn-warning" data-action="reset-graph">reset graph</button></h2>
+        <div id="container" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+    </section>
+
+    <section id="admin">
+        <h2>Admin</h2>
+        <div class="row">
+            <div class="col-md-2"></div>
+            <div class="col-md-3">
+                <div class="input-group">
+                    <input type="number" placeholder="size" class="form-control game-size" min="2" max="6" value="2">
+                    <span class="input-group-btn">
+                        <button class="btn btn-success" type="button" data-action="/admin/new">new game</button>
+                    </span>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="input-group">
+                    <input type="number" placeholder="tempo (ms)" class="form-control turn-tempo" min="0" value="0">
+                    <span class="input-group-btn">
+                        <button class="btn btn-warning" type="button" data-action="/admin/tempo">change tempo</button>
+                    </span>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <button type="button" class="btn btn-danger" data-action="/admin/reset">reset scores</button>
+            </div>
+        </div>
+    </section>
+
+    <section id="logs">
+        <h2 class="title">Logs <div class="arrow collapsed"></div></h2>
+        <div class="row block" style="display: none;">
+            <div class="col-md-12">
+                <textarea class="form-control" rows="14" disabled="disabled" style="font-size: 12px;"></textarea>
+            </div>
+        </div>
+    </section>
+
+    <section id="grid">
+        <h2 class="title">Grid <div class="arrow collapsed"></div></h2>
+        <div class="row block" style="display: none;">
+            <div class="col-md-12">
+                <table class="table">
+                </table>
+            </div>
+        </div>
+    </section>
+
+    <footer></footer>
+
+</div>
+
+    </body>
+</html>
