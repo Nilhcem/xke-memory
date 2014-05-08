@@ -1,0 +1,21 @@
+{
+    "gameId": 1,
+    "progress": 5.0,
+    "turn": {
+        "turnScore": 2,
+        "cards": [
+            {
+                "symbol": "coat",
+                "color": "blue",
+                "found": false
+            },
+            {
+                "symbol": "dog",
+                "color": "green",
+                "found": true
+            }
+        ],
+        "message": "warning"
+    },
+    "gameScore": 7
+}
