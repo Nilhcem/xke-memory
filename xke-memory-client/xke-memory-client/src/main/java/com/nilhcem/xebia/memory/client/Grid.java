@@ -40,14 +40,14 @@ public class Grid {
     Card[] getCardsThatMatches() {
         List<Card> playedCards = getAllCards().stream()
                 .filter(card -> card.getColor() != null)
-                .filter(card -> card.isFound() == false)
+                .filter(card -> !card.isFound())
                 .collect(Collectors.toList());
 
         for (Card curCard : playedCards) {
             Card similar = playedCards.stream()
                     .filter(card -> curCard.getX() != card.getX() || curCard.getY() != card.getY())
-                    .filter(card -> curCard.getColor() == card.getColor())
-                    .filter(card -> curCard.getSymbol() == card.getSymbol())
+                    .filter(card -> curCard.getColor().equals(card.getColor()))
+                    .filter(card -> curCard.getSymbol().equals(card.getSymbol()))
                     .findFirst().orElse(null);
 
             if (similar != null) {
