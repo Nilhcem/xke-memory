@@ -11,4 +11,8 @@ public class Config {
     public String getMemoryServerEndpoint() {
         return "http://localhost:3000";
     }
+
+    public int getGridSize() {
+        return 8;
+    }
 }

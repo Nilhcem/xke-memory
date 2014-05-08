@@ -10,7 +10,15 @@ public class Card {
     @JsonProperty private String color;
     @JsonProperty private boolean found;
 
+    private int x;
+    private int y;
+
     public Card() {
+    }
+
+    public Card(int x, int y) {
+        this.x = x;
+        this.y = y;
     }
 
     public String getSymbol() {
@@ -23,5 +31,13 @@ public class Card {
 
     public boolean isFound() {
         return found;
+    }
+
+    public int getX() {
+        return x;
+    }
+
+    public int getY() {
+        return y;
     }
 }

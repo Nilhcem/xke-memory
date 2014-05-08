@@ -14,6 +14,7 @@ import java.util.List;
 
 import static com.nilhcem.xebia.memory.client.AppTest.WIREMOCK_PORT;
 import static org.fest.assertions.Assertions.assertThat;
+import static org.mockito.Mockito.when;
 
 public class RetrofitServiceTest {
 
@@ -25,7 +26,7 @@ public class RetrofitServiceTest {
     @Before
     public void setup() {
         Config config = Mockito.mock(Config.class);
-        Mockito.when(config.getMemoryServerEndpoint()).thenReturn("http://localhost:" + WIREMOCK_PORT);
+        when(config.getMemoryServerEndpoint()).thenReturn("http://localhost:" + WIREMOCK_PORT);
         service = new RetrofitService(config);
     }
 
