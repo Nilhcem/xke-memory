@@ -181,4 +181,22 @@ public class GridTest {
         assertThat(actual.getX()).isEqualTo(5);
         assertThat(actual.getY()).isEqualTo(3);
     }
+
+    @Test
+    public void should_return_null_when_no_more_card_to_play() {
+        // Given
+        when(config.getGridSize()).thenReturn(1);
+        grid = new Grid(config, random);
+        Card card = mock(Card.class);
+        when(card.getColor()).thenReturn("purple");
+        when(card.getSymbol()).thenReturn("box");
+        when(card.isFound()).thenReturn(true);
+        grid.grid[0][0] = card;
+
+        // When
+        Card[] randomCards = grid.getRandomCards();
+
+        // Then
+        assertThat(randomCards).isNull();
+    }
 }

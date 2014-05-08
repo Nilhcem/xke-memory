@@ -59,6 +59,10 @@ public class Grid {
 
     Card[] getRandomCards() {
         List<Card> unplayed = getAllUnplayedCards();
+        if (unplayed.size() == 0) {
+            return null;
+        }
+
         Card card1 = getRandomCardFrom(unplayed);
         unplayed.remove(card1);
         Card card2 = getRandomCardFrom(unplayed);

@@ -34,6 +34,11 @@ public class MemoryClient {
 
             // Choose cards and call the WS
             Card[] cardsToPlay = grid.getCardsToPlay();
+            if (cardsToPlay == null) {
+                LOG.info("No more card to play");
+                break;
+            }
+
             PlayResponse response = play(cardsToPlay);
 
             // Update the grid
