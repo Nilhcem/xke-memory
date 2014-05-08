@@ -13,7 +13,7 @@ public class Config {
     }
 
     public int getGridSize() {
-        return 8;
+        return 6;
     }
 
     public int getSleepTimeBetweenWebCalls() {

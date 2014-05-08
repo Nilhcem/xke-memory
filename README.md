@@ -13,7 +13,7 @@ java -jar target/xke-memory-server-1.0-SNAPSHOT-shaded.jar
 
 cd ../xke-memory-monitoring
 open index.html
-# create a new game (size: 8)
+# create a new game (size: 6)
 
 cd ../xke-memory-client
 ./gradlew clean test run
