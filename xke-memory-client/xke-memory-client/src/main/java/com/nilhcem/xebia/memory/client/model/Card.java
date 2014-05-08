@@ -48,4 +48,15 @@ public class Card {
     public void setY(int y) {
         this.y = y;
     }
+
+    @Override
+    public String toString() {
+        return "Card{" +
+                "symbol='" + symbol + '\'' +
+                ", color='" + color + '\'' +
+                ", found=" + found +
+                ", x=" + x +
+                ", y=" + y +
+                '}';
+    }
 }
