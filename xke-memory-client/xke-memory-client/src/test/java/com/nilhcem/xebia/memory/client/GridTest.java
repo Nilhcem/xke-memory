@@ -162,4 +162,23 @@ public class GridTest {
         assertThat(cardsThatMatches[0].getColor()).isEqualTo("red");
         assertThat(cardsThatMatches[1].getSymbol()).isEqualTo("baloon");
     }
+
+    @Test
+    public void should_update_the_grid_and_set_cards_coordinates() {
+        // Given
+        Card played = mock(Card.class);
+        when(played.getX()).thenReturn(5);
+        when(played.getY()).thenReturn(3);
+        Card received = new Card(0, 0);
+        when(config.getGridSize()).thenReturn(6);
+        grid = new Grid(config, random);
+
+        // When
+        grid.updateGrid(played, received);
+
+        // Then
+        Card actual = grid.grid[5][3];
+        assertThat(actual.getX()).isEqualTo(5);
+        assertThat(actual.getY()).isEqualTo(3);
+    }
 }

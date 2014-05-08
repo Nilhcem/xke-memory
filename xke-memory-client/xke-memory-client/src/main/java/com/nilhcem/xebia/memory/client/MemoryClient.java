@@ -8,16 +8,19 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import javax.inject.Inject;
+import java.util.List;
 
 public class MemoryClient {
 
     private static final Logger LOG = LoggerFactory.getLogger(App.class);
 
+    private Config config;
     private MemoryApi api;
     private Grid grid;
 
     @Inject
-    public MemoryClient(RetrofitService retrofitService, Grid grid) {
+    public MemoryClient(Config config, RetrofitService retrofitService, Grid grid) {
+        this.config = config;
         this.api = retrofitService.get(MemoryApi.class);
         this.grid = grid;
     }
@@ -28,10 +31,24 @@ public class MemoryClient {
 
         for (int turn = 0; progress < 100; turn++) {
             LOG.debug("Turn #{}", turn);
+
+            // Choose cards and call the WS
             Card[] cardsToPlay = grid.getCardsToPlay();
+            PlayResponse response = play(cardsToPlay);
 
+            // Update the grid
+            List<Card> responseCards = response.getTurn().getCards();
+            grid.updateGrid(cardsToPlay[0], responseCards.get(0));
+            grid.updateGrid(cardsToPlay[1], responseCards.get(1));
 
-
+            // Update the progress
+            progress = response.getProgress();
+            LOG.debug("Progress #{}", progress);
+            try {
+                Thread.sleep(config.getSleepTimeBetweenWebCalls());
+            } catch (InterruptedException e) {
+                LOG.error("", e);
+            }
         }
         LOG.debug("Finished");
     }

@@ -84,4 +84,13 @@ public class Grid {
                 .filter(card -> card.getColor() == null)
                 .collect(Collectors.toList());
     }
+
+    public void updateGrid(Card cardPlayed, Card cardReturnedByWs) {
+        // Set coordinates to the new card
+        cardReturnedByWs.setX(cardPlayed.getX());
+        cardReturnedByWs.setY(cardPlayed.getY());
+
+        // Set the card in the grid
+        grid[cardPlayed.getX()][cardPlayed.getY()] = cardReturnedByWs;
+    }
 }

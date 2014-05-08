@@ -19,6 +19,9 @@ public class MemoryClientTest {
     private TestMemoryApi api = new TestMemoryApi();
 
     @Mock
+    private Config config;
+
+    @Mock
     private RetrofitService service;
 
     @Mock
@@ -28,7 +31,7 @@ public class MemoryClientTest {
     public void setup() {
         initMocks(this);
         when(service.get(MemoryApi.class)).thenReturn(api);
-        client = new MemoryClient(service, grid);
+        client = new MemoryClient(config, service, grid);
     }
 
     @Test
