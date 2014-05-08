@@ -1,8 +1,9 @@
 # XKE-Memory
 
-- __Goal:__ Develop a REST client for the given server and compete with everyone around.
+- __Goal:__ Develop a REST client for the given server and compete with everyone around
 - __Originator:__ sophietk
 
+Projects:
 
 - __xke-memory-server:__ REST server to play memory game
 - __xke-memory-monitoring:__ Simple page to monitor xke-memory-server
