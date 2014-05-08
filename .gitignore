@@ -5,6 +5,7 @@ tmp/
 
 # build directory
 build/
+target/
 
 # java
 *.class
