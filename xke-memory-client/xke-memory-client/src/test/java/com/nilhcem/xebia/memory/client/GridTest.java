@@ -146,7 +146,7 @@ public class GridTest {
 
         Card card2 = mock(Card.class);
         when(card2.getColor()).thenReturn("red");
-        when(card2.getSymbol()).thenReturn("baloon");
+        when(card2.getSymbol()).thenReturn("balloon");
         when(card2.getX()).thenReturn(1);
         when(card2.getY()).thenReturn(0);
         grid.grid[1][0] = card2;
@@ -160,7 +160,7 @@ public class GridTest {
         assertThat(cardsThatMatches[1]).isNotNull();
         assertThat(cardsThatMatches[0]).isNotSameAs(cardsThatMatches[1]);
         assertThat(cardsThatMatches[0].getColor()).isEqualTo("red");
-        assertThat(cardsThatMatches[1].getSymbol()).isEqualTo("baloon");
+        assertThat(cardsThatMatches[1].getSymbol()).isEqualTo("balloon");
     }
 
     @Test
