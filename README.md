@@ -1,20 +1,26 @@
 # XKE-Memory
 
-- xke-memory-server: REST server to play memory game
-- xke-memory-monitoring: Simple page to monitor xke-memory-server
-- xke-memory-client: Small client for the xke-memory-server
+- __Goal:__ Develop a REST client for the given server and compete with everyone around.
+- __Originator:__ sophietk
 
-## Howto
+
+- __xke-memory-server:__ REST server to play memory game
+- __xke-memory-monitoring:__ Simple page to monitor xke-memory-server
+- __xke-memory-client:__ Java8 client for the xke-memory-server
+
+## How to run
 
 ```bash
+# start the server
 cd xke-memory-server
 mvn clean package
 java -jar target/xke-memory-server-1.0-SNAPSHOT-shaded.jar
 
+# create a new game (size: 6)
 cd ../xke-memory-monitoring
 open index.html
-# create a new game (size: 6)
 
+# run the client
 cd ../xke-memory-client
 ./gradlew clean test run
 ```
@@ -28,7 +34,9 @@ Each turn, choose two cards to flip. If the two cards match, they are marked and
 - flip an already found card -> -3 pts
 - find two identical cards -> + 10 pts
 
-## Play
+## Server
+
+### Play
 
 Request:
 ```
@@ -63,9 +71,9 @@ Response:
 }
 ```
 
-## Scores
+### Scores
 
-### Same game scores
+#### Same game scores
 
 Request:
 ```
@@ -82,7 +90,7 @@ Response:
 }
 ```
 
-### Same player scores
+#### Same player scores
 
 Request:
 ```
@@ -97,6 +105,37 @@ Response:
   "1": 7                            // player scores for each round
 }
 ```
+
+#### Register your email
+
+Request:
+```
+URL: /scores/register
+Method: POST
+Content-Type: application/json
+```
+
+Response:
+```
+ok
+```
+
+## Client
+
+### Update the configuration
+
+You can modify the `Config.java` file to specify:
+
+- The ws endpoint
+- The grid size
+- The sleep time between each query
+- Your email
+
+### Modify the wiremock port
+
+By default, some unit tests will start a server on port `8888`.
+
+You can modify the port in the `AppTest.java` file.
 
 ## Acknowledgements
 
