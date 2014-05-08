@@ -114,6 +114,7 @@ Request:
 URL: /scores/register
 Method: POST
 Content-Type: application/json
+Body: your_email@hostname
 ```
 
 Response:
