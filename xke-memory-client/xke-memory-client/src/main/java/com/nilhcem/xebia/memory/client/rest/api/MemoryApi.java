@@ -8,4 +8,7 @@ public interface MemoryApi {
 
     @POST("/play")
     PlayResponse play(@Body int[][] cardsPositions);
+
+    @POST("/scores/register")
+    String registerEmail(@Body String email);
 }

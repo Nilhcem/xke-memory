@@ -19,4 +19,8 @@ public class Config {
     public int getSleepTimeBetweenWebCalls() {
         return 300;
     }
+
+    public String getEmail() {
+        return "my_email@example.org";
+    }
 }

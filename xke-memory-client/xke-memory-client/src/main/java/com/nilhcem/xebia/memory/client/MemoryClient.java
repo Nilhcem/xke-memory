@@ -6,6 +6,7 @@ import com.nilhcem.xebia.memory.client.rest.RetrofitService;
 import com.nilhcem.xebia.memory.client.rest.api.MemoryApi;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import retrofit.RetrofitError;
 
 import javax.inject.Inject;
 import java.util.List;
@@ -27,8 +28,9 @@ public class MemoryClient {
 
     public void start() {
         LOG.debug("Starting Memory Client");
-        float progress = 0f;
+        register();
 
+        float progress = 0f;
         for (int turn = 0; progress < 100; turn++) {
             LOG.debug("Turn #{}", turn);
 
@@ -49,11 +51,7 @@ public class MemoryClient {
             // Update the progress
             progress = response.getProgress();
             LOG.debug("Progress #{}", progress);
-            try {
-                Thread.sleep(config.getSleepTimeBetweenWebCalls());
-            } catch (InterruptedException e) {
-                LOG.error("", e);
-            }
+            sleep();
         }
         LOG.debug("Finished");
     }
@@ -61,5 +59,22 @@ public class MemoryClient {
     PlayResponse play(Card[] toPlay) {
         LOG.debug("Playing cards: {} - {}", toPlay[0], toPlay[1]);
         return api.play(new int[][]{new int[]{toPlay[0].getX(), toPlay[0].getY()}, new int[]{toPlay[1].getX(), toPlay[1].getY()}});
+    }
+
+    void sleep() {
+        try {
+            Thread.sleep(config.getSleepTimeBetweenWebCalls());
+        } catch (InterruptedException e) {
+            LOG.error("", e);
+        }
+    }
+
+    void register() {
+        try {
+            api.registerEmail(config.getEmail());
+            sleep();
+        } catch (RetrofitError e) {
+            LOG.warn("{}", e.getMessage());
+        }
     }
 }

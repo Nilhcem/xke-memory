@@ -7,7 +7,6 @@ import com.nilhcem.xebia.memory.client.rest.api.MemoryApi;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
-import retrofit.http.Body;
 
 import static org.fest.assertions.Assertions.assertThat;
 import static org.mockito.Mockito.when;
@@ -55,9 +54,14 @@ public class MemoryClientTest {
         int[][] cardsPositions;
 
         @Override
-        public PlayResponse play(@Body int[][] cardsPositions) {
+        public PlayResponse play(int[][] cardsPositions) {
             this.cardsPositions = cardsPositions;
             return new PlayResponse();
+        }
+
+        @Override
+        public String registerEmail(String email) {
+            return null;
         }
     }
 }
