@@ -2,6 +2,7 @@ package com.nilhcem.xebia.memory.client;
 
 import com.nilhcem.xebia.memory.client.model.Card;
 import com.nilhcem.xebia.memory.client.util.Random;
+import org.fest.assertions.Assertions;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
@@ -122,5 +123,43 @@ public class GridTest {
         // Then
         assertThat(card.getX()).isEqualTo(0);
         assertThat(card.getY()).isEqualTo(2);
+    }
+
+    @Test
+    public void should_return_null_when_no_card_matches() {
+        // When
+        Card[] cardsThatMatches = grid.getCardsThatMatches();
+
+        // Then
+        assertThat(cardsThatMatches).isNull();
+    }
+
+    @Test
+    public void should_return_card_that_matches() {
+        // Given
+        Card card1 = mock(Card.class);
+        when(card1.getColor()).thenReturn("red");
+        when(card1.getSymbol()).thenReturn("baloon");
+        when(card1.getX()).thenReturn(0);
+        when(card1.getY()).thenReturn(0);
+        grid.grid[0][0] = card1;
+
+        Card card2 = mock(Card.class);
+        when(card2.getColor()).thenReturn("red");
+        when(card2.getSymbol()).thenReturn("baloon");
+        when(card2.getX()).thenReturn(1);
+        when(card2.getY()).thenReturn(0);
+        grid.grid[1][0] = card2;
+
+        // When
+        Card[] cardsThatMatches = grid.getCardsThatMatches();
+
+        // Then
+        Assertions.assertThat(cardsThatMatches).hasSize(2);
+        assertThat(cardsThatMatches[0]).isNotNull();
+        assertThat(cardsThatMatches[1]).isNotNull();
+        assertThat(cardsThatMatches[0]).isNotSameAs(cardsThatMatches[1]);
+        assertThat(cardsThatMatches[0].getColor()).isEqualTo("red");
+        assertThat(cardsThatMatches[1].getSymbol()).isEqualTo("baloon");
     }
 }

@@ -7,6 +7,7 @@ import javax.inject.Inject;
 import javax.inject.Singleton;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Singleton
 public class Grid {
@@ -36,9 +37,23 @@ public class Grid {
         return cards;
     }
 
-    private Card[] getCardsThatMatches() {
+    Card[] getCardsThatMatches() {
+        List<Card> playedCards = getAllCards().stream()
+                .filter(card -> card.getColor() != null)
+                .filter(card -> card.isFound() == false)
+                .collect(Collectors.toList());
 
+        for (Card curCard : playedCards) {
+            Card similar = playedCards.stream()
+                    .filter(card -> curCard.getX() != card.getX() || curCard.getY() != card.getY())
+                    .filter(card -> curCard.getColor() == card.getColor())
+                    .filter(card -> curCard.getSymbol() == card.getSymbol())
+                    .findFirst().orElse(null);
 
+            if (similar != null) {
+                return new Card[]{curCard, similar};
+            }
+        }
         return null;
     }
 
@@ -54,17 +69,19 @@ public class Grid {
         return cards.get(random.getBetweenInclusive(0, cards.size() - 1));
     }
 
-    List<Card> getAllUnplayedCards() {
-        List<Card> unplayed = new ArrayList<Card>();
-
+    List<Card> getAllCards() {
+        List<Card> cards = new ArrayList<>();
         for (int x = 0; x < size; x++) {
             for (int y = 0; y < size; y++) {
-                Card card = grid[x][y];
-                if (card.getColor() == null) {
-                    unplayed.add(card);
-                }
+                cards.add(grid[x][y]);
             }
         }
-        return unplayed;
+        return cards;
+    }
+
+    List<Card> getAllUnplayedCards() {
+        return getAllCards().stream()
+                .filter(card -> card.getColor() == null)
+                .collect(Collectors.toList());
     }
 }
