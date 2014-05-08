@@ -16,7 +16,7 @@ open index.html
 # create a new game (size: 8)
 
 cd ../xke-memory-client
-gradle clean run
+./gradlew clean test run
 ```
 
 ## Game rules
