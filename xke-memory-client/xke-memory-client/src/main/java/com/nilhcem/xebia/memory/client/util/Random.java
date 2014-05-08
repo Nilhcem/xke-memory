@@ -1,14 +1,18 @@
 package com.nilhcem.xebia.memory.client.util;
 
+import javax.inject.Inject;
+import javax.inject.Singleton;
+
+@Singleton
 public class Random {
 
-    static final java.util.Random random = new java.util.Random();
+    java.util.Random random = new java.util.Random();
 
-    private Random() {
-        throw new UnsupportedOperationException();
+    @Inject
+    public Random() {
     }
 
-    public static int getBetweenInclusive(int min, int max) {
+    public int getBetweenInclusive(int min, int max) {
         return random.nextInt((max - min) + 1) + min;
     }
 }

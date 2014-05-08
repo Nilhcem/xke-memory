@@ -24,12 +24,20 @@ public class MemoryClient {
 
     public void start() {
         LOG.debug("Starting Memory Client");
+        float progress = 0f;
 
+        for (int turn = 0; progress < 100; turn++) {
+            LOG.debug("Turn #{}", turn);
+            Card[] cardsToPlay = grid.getCardsToPlay();
+
+
+
+        }
         LOG.debug("Finished");
     }
 
     PlayResponse play(Card[] toPlay) {
-        LOG.debug("Playing cards: {}", toPlay);
+        LOG.debug("Playing cards: {} - {}", toPlay[0], toPlay[1]);
         return api.play(new int[][]{new int[]{toPlay[0].getX(), toPlay[0].getY()}, new int[]{toPlay[1].getX(), toPlay[1].getY()}});
     }
 }
