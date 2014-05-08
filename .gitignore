@@ -1,0 +1,23 @@
+# temporary files
+*~
+\#*#
+tmp/
+
+# build directory
+build/
+
+# java
+*.class
+
+# intelliJ
+.idea/
+*.iml
+*.iws
+*.ipr
+
+# mac / windows
+.DS_Store
+Thumbs.db
+
+# gradle
+.gradle/
