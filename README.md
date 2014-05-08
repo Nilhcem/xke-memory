@@ -6,9 +6,20 @@
 
 ## Howto
 
-TODO
+```bash
+cd xke-memory-server
+mvn clean package
+java -jar target/xke-memory-server-1.0-SNAPSHOT-shaded.jar
 
-## game rules
+cd ../xke-memory-monitoring
+open index.html
+# create a new game (size: 8)
+
+cd ../xke-memory-client
+gradle clean run
+```
+
+## Game rules
 
 Each turn, choose two cards to flip. If the two cards match, they are marked and should not be replayed. The game is finished when all pairs of cards are found.
 
@@ -17,7 +28,7 @@ Each turn, choose two cards to flip. If the two cards match, they are marked and
 - flip an already found card -> -3 pts
 - find two identical cards -> + 10 pts
 
-## play
+## Play
 
 Request:
 ```
@@ -52,9 +63,9 @@ Response:
 }
 ```
 
-## scores
+## Scores
 
-### same game scores
+### Same game scores
 
 Request:
 ```
@@ -71,7 +82,7 @@ Response:
 }
 ```
 
-### same player scores
+### Same player scores
 
 Request:
 ```
