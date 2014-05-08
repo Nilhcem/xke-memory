@@ -139,7 +139,7 @@ public class GridTest {
         // Given
         Card card1 = mock(Card.class);
         when(card1.getColor()).thenReturn("red");
-        when(card1.getSymbol()).thenReturn("baloon");
+        when(card1.getSymbol()).thenReturn("balloon");
         when(card1.getX()).thenReturn(0);
         when(card1.getY()).thenReturn(0);
         grid.grid[0][0] = card1;
